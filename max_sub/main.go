@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	A := []int{-13, -3, 1000, 200, -200, -29, -100, -2900}
+	A := []int{-2, -1}
 	n := len(A)
 	fmt.Println(findMaxSub(A, 0, n-1))
 }
@@ -34,6 +34,14 @@ func findMaxSub(A []int, low, high int) (int, int, int) {
 	if high == low {
 		return low, high, A[low]
 	}
+	if len(A) < 3 {
+		if A[low] > A[high] {
+			return low, high, A[low]
+		} else {
+			return low, high, A[high]
+		}
+	}
+
 	mid := (low + high) / 2
 	leftLow, leftHigh, leftSum := findMaxSub(A, low, mid)
 	rightLow, rightHigh, rightSum := findMaxSub(A, mid+1, high)
